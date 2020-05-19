@@ -14,15 +14,24 @@ PyPI package `etcetera` provides:
 
 ### Using Command Line
 
-`etc ls` list local datasets.
+```bash
+etc -h
+usage: etc [-h] {ls,register,pull,push,purge} ...
 
-`etc ls --remote` list remote datasets.
+etcetera: managing cloud-hosted datasets
 
-`etc pull <DATASET> [-f/--force]` downloads remote dataset and installs it locally.
+positional arguments:
+  {ls,register,pull,push,purge}
+                        command
+    ls                  List datasets
+    register            Register directory as a dataset
+    pull                Pull dataset from repository
+    push                Push dataset to the repository
+    purge               Purge local dataset
 
-`etc push <DATASET> [-f/--force]` packages local dataset and uploads it to the cloud storage.
-
-`etc register <LOCAL_DIR> <DATASET> [-f/--force]` validates dataset and registers it as a local dataset
+optional arguments:
+  -h, --help            show this help message and exit
+```
 
 ### Using Python
 ```python
@@ -44,15 +53,32 @@ dataset.root
 ```
 
 ## Configuration
-`~/.etc.yaml` contains configuration for the service:
 
-Example:
+`~/.etc.yaml` contains configuration for the service in YAML format. Example:
+
 ```yaml
 url: "s3://my-bucket"
+```
+
+Another example:
+
+```yaml
+url: "s3://my-bucket"
+public: false
 aws_access_key_id: Axxxx
 aws_secret_access_key: Axxx
-public: false
+endpoint_url: https://s3.amazonaws.com
 ```
+
+A configuration file is required for remote operations (`pull`, `push`, `ls -r`).
+
+URL value is required. The rest is optional.
+
+* `url`: URL of the remote repository. For example, `s3://my-bucket`.
+* `public`: set to `true` if you want `push` to create publicly-readable cloud files.
+   Default is `false`.
+* `aws_access_key_id`, `aws_secret_access_key`, `endpoint_url`: configuration files to access
+   AWS api. If not set, the defaults from global AWS config will be used.
 
 ## Command-line example
 ```bash
