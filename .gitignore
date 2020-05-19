@@ -1,0 +1,8 @@
+__pycache__
+/build
+/dist
+/wheelhouse
+/docs/build
+/*.egg-info
+/sample
+.venv
