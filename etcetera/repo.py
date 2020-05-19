@@ -12,7 +12,7 @@ class Repo:
         protocol = mtc.group(1)
 
         try:
-            impl = importlib.import_module('etc.impl.' + protocol)
+            impl = importlib.import_module('etcetera.impl.' + protocol)
             return impl.load(url, **conf)
         except ImportError:
             raise

@@ -1,5 +1,5 @@
 from pathlib import Path
-import yaml
+import toml
 
 class Config:
     def __init__(self, url:str, home=None, **conf):
@@ -18,7 +18,7 @@ class Config:
             raise RuntimeError(f'Can not find configuration file {filename}')
 
         with open(filename) as f:
-            conf = yaml.load(f, Loader=yaml.Loader)
+            conf = toml.loads(f.read())
 
         url = conf.pop('url', None)
         if url is None:

@@ -1,4 +1,4 @@
-
+from etcetera import api
 
 def main():
     import argparse
@@ -29,20 +29,20 @@ def main():
     args = parser.parse_args()
 
     if args.cmd == 'ls':
-        for x in ls(remote=args.remote):
+        for x in api.ls(remote=args.remote):
             print(x)
 
     elif args.cmd == 'register':
-        register(args.directory, args.name, force=args.force)
+        api.register(args.directory, args.name, force=args.force)
 
     elif args.cmd == 'pull':
-        pull(args.name, force=args.force)
+        api.pull(args.name, force=args.force)
 
     elif args.cmd == 'push':
-        push(args.name, force=args.force)
+        api.push(args.name, force=args.force)
 
     elif args.cmd == 'purge':
-        purge(args.name)
+        api.purge(args.name)
 
     else:
         parser.error('Unknown command')

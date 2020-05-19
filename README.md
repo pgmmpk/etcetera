@@ -54,20 +54,20 @@ dataset.root
 
 ## Configuration
 
-`~/.etc.yaml` contains configuration for the service in YAML format. Example:
+`~/.etc.toml` contains configuration for the service in TOML format. Example:
 
-```yaml
-url: "s3://my-bucket"
+```toml
+url = "s3://my-bucket"
 ```
 
 Another example:
 
-```yaml
-url: "s3://my-bucket"
-public: false
-aws_access_key_id: Axxxx
-aws_secret_access_key: Axxx
-endpoint_url: https://s3.amazonaws.com
+```toml
+url = "s3://my-bucket"
+public = false
+aws_access_key_id = Axxxx
+aws_secret_access_key = Axxx
+endpoint_url = https://s3.amazonaws.com
 ```
 
 A configuration file is required for remote operations (`pull`, `push`, `ls -r`).
