@@ -29,7 +29,7 @@ setup(
 
     packages=find_packages(),
     python_requires='>=3.6',
-    install_requires=[ 'PyYAML' ],
+    install_requires=[ 'toml' ],
     extras_require={
         's3': [ 'boto3' ],
     },
