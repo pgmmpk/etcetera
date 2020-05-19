@@ -5,7 +5,7 @@ python:
 
 branches:
     only:
-    - master
+        - master
 
 script:
     - make maybe_publish  # test, build wheel, and (if on tag) publish
