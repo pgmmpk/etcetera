@@ -4,7 +4,7 @@ API Reference
 
 dataset
 --------
-.. autofunc:: dataset
+.. autofunction:: dataset
 
 Dataset
 ^^^^^^^
@@ -13,6 +13,30 @@ Dataset
     :special-members:
     :exclude-members: __dict__,__weakref__
 
+Config
+------
+
+.. autoclass:: Config
+    :members:
+    :special-members:
+    :exclude-members: __dict__,__weakref__
+
 ls
 --
-.. autofunc:: ls
+.. autofunction:: ls
+
+register
+--------
+.. autofunction:: register
+
+pull
+----
+.. autofunction:: pull
+
+push
+----
+.. autofunction:: push
+
+purge
+-----
+.. autofunction:: purge

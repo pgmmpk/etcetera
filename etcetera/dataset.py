@@ -17,10 +17,15 @@ class Dataset:
             self.meta.update(json.loads(json_text))
 
     def file(self, *av):
+        '''convenience method to build a file path relative to dataset root.
+
+        Example: ``dataset.file('README.md')``
+        '''
         return self.location.joinpath(*av)
 
     @property
     def data(self):
+        '''Path to the data directory within the dataset'''
         return self.file('data')
 
     def partitions(self):
