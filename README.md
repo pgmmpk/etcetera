@@ -75,14 +75,14 @@ Another example:
 ```toml
 url = "s3://my-bucket"
 public = false
-aws_access_key_id = Axxxx
-aws_secret_access_key = Axxx
-endpoint_url = https://s3.amazonaws.com
+aws_access_key_id = "Axxxx"
+aws_secret_access_key = "Kxxx"
+endpoint_url = "https://s3.amazonaws.com"
 ```
 
-A configuration file is required for remote operations (`pull`, `push`, `ls -r`).
+A configuration file is required for remote operations (`pull`, `push`, `ls -r`). It is not required for local operations (`ls`, `register`).
 
-URL value is required. The rest is optional.
+In configuration file `url` value is required. The rest is optional.
 
 * `url`: URL of the remote repository. For example, `s3://my-bucket`.
 * `public`: set to `true` if you want `push` to create publicly-readable cloud files.

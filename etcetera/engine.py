@@ -62,6 +62,8 @@ class Engine:
         with tempfile.TemporaryDirectory() as d:
             tgz_name = f'{d}/temp.tgz'
             logging.info('Downloading dataset %s from repo %s', name, repo)
+            if not repo.exists(name + '.tgz'):
+                raise ValueError(f'Dataset {name} not found in the remote repository {repo}')
             repo.download(name + '.tgz', tgz_name)
 
             if self.is_local_dataset(name):
