@@ -4,7 +4,7 @@ try:
     import boto3
     import botocore
 except ImportError:
-    raise ImportError('boto3 not installed.')
+    raise ImportError('boto3 not installed. Please re-install etcetera with s3 option: "pip install \'etcetera[s3]\'"')
 
 def load(url, aws_access_key_id=None, aws_access_key_secret=None, endpoint_url=None, public=False):
     return S3Repo(url, aws_access_key_id, aws_access_key_secret, endpoint_url, public)

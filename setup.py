@@ -27,7 +27,7 @@ setup(
         'Programming Language :: Python :: 3',
     ],
 
-    packages=find_packages(),
+    packages=['etcetera', 'etcetera.impl'],
     python_requires='>=3.6',
     install_requires=[ 'toml' ],
     extras_require={

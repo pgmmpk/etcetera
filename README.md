@@ -56,6 +56,12 @@ dataset.root
 >> "~/.etc/flower"
 ```
 
+## Installing
+```
+pip install 'etcetera[s3]'
+```
+Installs `etceters` with the support for S3 cloud.
+
 ## Configuration
 
 `~/.etc.toml` contains configuration for the service in TOML format. Example:
