@@ -3,6 +3,7 @@ from .dataset import Dataset
 from .repo import Repo
 import tempfile
 import tarfile
+import logging
 from typing import Optional, Iterable
 
 
@@ -33,6 +34,7 @@ class Engine:
         dataset_path.symlink_to(dirname)
 
     def purge(self, name:str):
+        logging.info('Purging dataset %s', name)
         dataset_path = self.home / name
         if dataset_path.is_symlink():
             dataset_path.unlink()
@@ -46,8 +48,11 @@ class Engine:
             raise RuntimeError(f'Dataset {name} already exist in repository {repo}. Use "force" to override.')
         with tempfile.TemporaryDirectory() as d:
             tgz_name = f'{d}/temp.tgz'
+            logging.info('Packing dataset %s', name)
             make_tgz(self.home / name, tgz_name)
+            logging.info('Uploading dataset %s to repo %s', name, repo)
             repo.upload(tgz_name, name + '.tgz')
+            logging.info('Done')
 
     def pull(self, name:str, repo:Repo, force=False):
         if self.is_local_dataset(name):
@@ -56,12 +61,15 @@ class Engine:
 
         with tempfile.TemporaryDirectory() as d:
             tgz_name = f'{d}/temp.tgz'
+            logging.info('Downloading dataset %s from repo %s', name, repo)
             repo.download(name + '.tgz', tgz_name)
 
             if self.is_local_dataset(name):
                 self.purge(name)
 
+            logging.info('Unpacking dataset %s', name)
             unpack_tgz(tgz_name, self.home / name)
+            logging.info('Done')
 
     def is_local_dataset(self, name:str) -> bool:
         return (self.home / name).exists()

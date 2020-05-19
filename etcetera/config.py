@@ -10,7 +10,7 @@ class Config:
     @classmethod
     def load(cls, filename=None):
         if filename is None:
-            filename = Path.home() / '.etc.yaml'
+            filename = Path.home() / '.etc.toml'
         else:
             filename = Path(filename)
 

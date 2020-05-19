@@ -1,9 +1,12 @@
 from etcetera import api
+import argparse
+import logging
+
 
 def main():
-    import argparse
 
     parser = argparse.ArgumentParser(prog='etc', description='etcetera: managing cloud-hosted datasets')
+    parser.add_argument('-v', '--verbose', action='store_true', help='Print debug info')
 
     subparsers = parser.add_subparsers(dest='cmd', help='command')
 
@@ -27,6 +30,7 @@ def main():
     parser_purge.add_argument('name', help='Dataset name')
 
     args = parser.parse_args()
+    logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
 
     if args.cmd == 'ls':
         for x in api.ls(remote=args.remote):
