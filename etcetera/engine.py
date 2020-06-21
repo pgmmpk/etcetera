@@ -4,6 +4,7 @@ from .repo import Repo
 import tempfile
 import tarfile
 import logging
+import os
 from typing import Optional, Iterable
 
 
@@ -79,6 +80,17 @@ class Engine:
     def dataset(self, name:str) -> Dataset:
         return Dataset(self.home / name)
 
+    def create(self, name:str, partitions=('train', 'test'), force=False):
+        if force:
+            self.purge(name)
+        if self.is_local_dataset(name):
+            raise ValueError(f'Local dataset {name} already exists. To delete the existing one use --force flag')
+
+        os.makedirs(self.home / name / 'data')
+        for p in partitions:
+            os.makedirs(self.home / name / 'data' / p)
+
+        return Dataset(self.home / name)
 
 def rmrf(path:Path):
     '''recursively removes directory "path"'''

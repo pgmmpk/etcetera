@@ -36,6 +36,11 @@ def test_smoke():
             e.pull('test-dataset2', repo)
             assert set(e.ls()) == {'test-dataset2'}
 
+            e.create('xyz')
+            ds = e.dataset('xyz')
+            assert ds.partitions() == ['test', 'train']
+            assert set(e.ls()) == {'test-dataset2', 'xyz'}
+
             ds = e.dataset('test-dataset2')
             assert ds.partitions() == ['train']
             files = list(ds['train'].iterdir())

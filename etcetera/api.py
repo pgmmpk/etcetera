@@ -89,6 +89,21 @@ def purge(name:str, config=None):
     engine.purge(name)
 
 
+def create(name:str, partitions=('train', 'test'), force=False, config=None):
+    '''Create an empty local dataset.
+
+    Args:
+        name (str): dataset name
+        partitions (List[str]): list of partitions to create
+        force (bool): allow overriding the existing dataset
+        config (etcetera.Config):  configuration to use
+    '''
+    if config is None:
+        config = Config.load()
+    engine = Engine(config.home)
+    engine.create(name, partitions, force=force)
+
+
 def ls(remote=False, config=None):
     '''Lists datasets.
 

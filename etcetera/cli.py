@@ -29,6 +29,10 @@ def main():
     parser_purge = subparsers.add_parser('purge', help='Purge local dataset')
     parser_purge.add_argument('name', help='Dataset name')
 
+    parser_create = subparsers.add_parser('create', help='Create empty local dataset with "train" and "test" partitions.')
+    parser_create.add_argument('name', help='Dataset name')
+    parser_create.add_argument('-f', '--force', action='store_true', help='If local dataset with the same name already exists, purge it.')
+
     args = parser.parse_args()
     logging.basicConfig(level=logging.DEBUG if args.verbose else logging.INFO)
 
@@ -47,6 +51,9 @@ def main():
 
     elif args.cmd == 'purge':
         api.purge(args.name)
+
+    elif args.cmd == 'create':
+        api.create(args.name, force=args.force)
 
     else:
         parser.error('Unknown command')
