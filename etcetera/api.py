@@ -11,6 +11,9 @@ def dataset(name:str, auto_pull=False, config=None):
         name (str):               the name of the dataset
         auto_pull(bool):          if set, automatically pulls the dataset from the cloud
         config (etcetera.Config): configuration to use
+
+    Returns:
+        :class:`etcetera.Dataset` representing this
     '''
     if config is None:
         config = Config.load()
@@ -97,11 +100,14 @@ def create(name:str, partitions=('train', 'test'), force=False, config=None):
         partitions (List[str]): list of partitions to create
         force (bool): allow overriding the existing dataset
         config (etcetera.Config):  configuration to use
+
+    Returns:
+        :class:`etcetera.Dataset` representing the newly created dataset.
     '''
     if config is None:
         config = Config.load()
     engine = Engine(config.home)
-    engine.create(name, partitions, force=force)
+    return engine.create(name, partitions, force=force)
 
 
 def ls(remote=False, config=None):
